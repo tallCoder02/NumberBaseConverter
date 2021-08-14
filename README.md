@@ -8,3 +8,11 @@ App does not currently work with floating point numbers.
 OR
 
 Run ```pip install PyQt5``` in your terminal
+
+# Screenshots
+<img src="https://github.com/tallCoder02/NumberBaseConverter/blob/main/Screenshot_1.png" />
+<img src="https://github.com/tallCoder02/NumberBaseConverter/blob/main/Screenshot_2.png" />
+
+###### Note: The app may look different on your system due to your personalised theme.
+
+# The End 🏌️
