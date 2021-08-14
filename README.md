@@ -5,14 +5,13 @@ App does not currently work with floating point numbers.
 # Requirements
 - [PyQT5](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjCovLfprHyAhUiz4UKHS09AR8QFnoECAkQAQ&url=https%3A%2F%2Fpypi.org%2Fproject%2FPyQt5%2F&usg=AOvVaw0EeShOkWhnATg1gBLmZbyl) ([PyQT5 Docs](https://www.riverbankcomputing.com/static/Docs/PyQt5/))
 
-OR
-
+# Installing requirements
 Run ```pip install PyQt5``` in your terminal
 
 # Screenshots
 <img src="https://github.com/tallCoder02/NumberBaseConverter/blob/main/Screenshot_1.png" />
 <img src="https://github.com/tallCoder02/NumberBaseConverter/blob/main/Screenshot_2.png" />
 
-###### Note: The app may look different on your system due to your personalised theme.
+###### Note: The app may look different on your system depending on your theme settings.
 
 # The End 🏌️
