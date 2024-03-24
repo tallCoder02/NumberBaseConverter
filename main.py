@@ -76,23 +76,19 @@ class MainWindow(qtw.QWidget):
 
         def converter():
             combo1 = first_combo.currentIndex() + 2
-            entry = entry_box.displayText()
-            combo2 = second_combo.currentData()
+            entry = entry_box.displayText().upper()
+            combo2 = second_combo.currentIndex()
 
             if entry != "":
                 try:
                     entry_10 = int(entry, combo1)
-                    if combo2 == "bin":
-                        dec2bin = bin(int(entry_10))[2:]  # To get rid of the 0b
-                        warning_label.setText(dec2bin)
-                    elif combo2 == "oct":
-                        dec2oct = oct(int(entry_10))[2:]  # To get rid of the 0o
-                        warning_label.setText(dec2oct)
-                    elif combo2 == "hex":
-                        dec2hex = hex(int(entry_10))[2:].upper()  # To get rid of the 0x
-                        warning_label.setText(dec2hex)
-                    elif combo2 == "dec":
-                        warning_label.setText(str(entry_10))
+                    systems_dict = {0: 2, 1: 8, 2: 10, 3: 16}
+                    systems_dict_console = {0: "bin", 1: "oct", 3: "hex"}
+                    if combo2 != 2:
+                        dec2 = eval(f'{systems_dict_console[combo2]}({entry_10})')[2:].upper()
+                        warning_label.setText(f'{entry}<sub>{combo1}</sub> = {dec2}<sub>{systems_dict[combo2]}</sub>')
+                    else:
+                        warning_label.setText(f'{entry}<sub>{combo1}</sub> = {entry_10}<sub>{10}</sub>')
                 except ValueError:
                     warning_label.setText('Invalid Input!!!')
                 except Exception as e:
