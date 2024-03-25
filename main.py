@@ -30,22 +30,22 @@ class MainWindow(qtw.QWidget):
         first_combo = qtw.QComboBox(self)
         #           Combo Box Items
         first_combo.addItems([
-            "Binary [Base 2]",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "Octal [Base 8]",
-            "9",
-            "Decimal [Base 10]",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "Hexadecimal [Base 16]"
-            ])
+            "Base 2 [Binary]",
+            "Base 3 [Ternary]",
+            "Base 4 [Quaternary]",
+            "Base 5 [Quinary]",
+            "Base 6 [Senary]",
+            "Base 7 [Septenary]",
+            "Base 8 [Octal]",
+            "Base 9 [Nonary]",
+            "Base 10 [Decimal]",
+            "Base 11 [Undecimal]",
+            "Base 12 [Duodecimal]",
+            "Base 13 [Tridecimal]",
+            "Base 14 [Tetradecimal]",
+            "Base 15 [Pentadecimal]",
+            "Base 16 [Hexadecimal]"
+        ])
         self.layout().addWidget(first_combo)
 
         # Label2
@@ -56,10 +56,10 @@ class MainWindow(qtw.QWidget):
         # Combo Box 2
         second_combo = qtw.QComboBox(self)
         #           Combo Box Items
-        second_combo.addItem("Binary [Base 2]", "bin")
-        second_combo.addItem("Octal [Base 8]", "oct")
-        second_combo.addItem("Decimal [Base 10]", "dec")
-        second_combo.addItem("Hexadecimal [Base 16]", "hex")
+        second_combo.addItem("Base 2 [Binary]", "bin")
+        second_combo.addItem("Base 8 [Octal]", "oct")
+        second_combo.addItem("Base 10 [Decimal]", "dec")
+        second_combo.addItem("Base 16 [Hexadecimal]", "hex")
         self.layout().addWidget(second_combo)
 
         # Button
@@ -85,14 +85,18 @@ class MainWindow(qtw.QWidget):
                     systems_dict = {0: 2, 1: 8, 2: 10, 3: 16}
                     systems_dict_console = {0: "bin", 1: "oct", 3: "hex"}
                     if combo2 != 2:
-                        dec2 = eval(f'{systems_dict_console[combo2]}({entry_10})')[2:].upper()
-                        warning_label.setText(f'{entry}<sub>{combo1}</sub> = {dec2}<sub>{systems_dict[combo2]}</sub>')
+                        dec2 = eval(f'{systems_dict_console[combo2]}({entry_10})')[
+                            2:].upper()
+                        warning_label.setText(
+                            f'{entry}<sub>{combo1}</sub> = {dec2}<sub>{systems_dict[combo2]}</sub>')
                     else:
-                        warning_label.setText(f'{entry}<sub>{combo1}</sub> = {entry_10}<sub>{10}</sub>')
+                        warning_label.setText(
+                            f'{entry}<sub>{combo1}</sub> = {entry_10}<sub>{10}</sub>')
                 except ValueError:
                     warning_label.setText('Invalid Input!!!')
                 except Exception as e:
-                    print(f'Error: {e}')  # Funnily enough, I'm pretty sure this is unnecessary. 🤔
+                    # Funnily enough, I'm pretty sure this is unnecessary. 🤔
+                    print(f'Error: {e}')
             else:
                 warning_label.setText("Entry box cannot be empty!!!")
 
