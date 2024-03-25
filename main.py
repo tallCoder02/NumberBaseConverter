@@ -29,10 +29,23 @@ class MainWindow(qtw.QWidget):
         # Combo Box 1
         first_combo = qtw.QComboBox(self)
         #           Combo Box Items
-        first_combo.addItem("Binary [Base 2]", "bin")
-        first_combo.addItem("Octal [Base 8]", "oct")
-        first_combo.addItem("Decimal [Base 10]", "dec")
-        first_combo.addItem("Hexadecimal [Base 16]", "hex")
+        first_combo.addItems([
+            "Base 2 [Binary]",
+            "Base 3 [Ternary]",
+            "Base 4 [Quaternary]",
+            "Base 5 [Quinary]",
+            "Base 6 [Senary]",
+            "Base 7 [Septenary]",
+            "Base 8 [Octal]",
+            "Base 9 [Nonary]",
+            "Base 10 [Decimal]",
+            "Base 11 [Undecimal]",
+            "Base 12 [Duodecimal]",
+            "Base 13 [Tridecimal]",
+            "Base 14 [Tetradecimal]",
+            "Base 15 [Pentadecimal]",
+            "Base 16 [Hexadecimal]"
+        ])
         self.layout().addWidget(first_combo)
 
         # Label2
@@ -43,10 +56,10 @@ class MainWindow(qtw.QWidget):
         # Combo Box 2
         second_combo = qtw.QComboBox(self)
         #           Combo Box Items
-        second_combo.addItem("Binary [Base 2]", "bin")
-        second_combo.addItem("Octal [Base 8]", "oct")
-        second_combo.addItem("Decimal [Base 10]", "dec")
-        second_combo.addItem("Hexadecimal [Base 16]", "hex")
+        second_combo.addItem("Base 2 [Binary]", "bin")
+        second_combo.addItem("Base 8 [Octal]", "oct")
+        second_combo.addItem("Base 10 [Decimal]", "dec")
+        second_combo.addItem("Base 16 [Hexadecimal]", "hex")
         self.layout().addWidget(second_combo)
 
         # Button
@@ -62,58 +75,28 @@ class MainWindow(qtw.QWidget):
         self.show()
 
         def converter():
-            combo1 = first_combo.currentData()
-            entry = entry_box.displayText()
-            combo2 = second_combo.currentData()
+            combo1 = first_combo.currentIndex() + 2
+            entry = entry_box.displayText().upper()
+            combo2 = second_combo.currentIndex()
 
             if entry != "":
                 try:
-                    if combo1 == combo2:
-                        warning_label.setText(entry)
-                    elif combo1 == "bin":
-                        bin2dec = int(entry, 2)
-                        if combo2 == "oct":
-                            bin2oct = oct(bin2dec)[2:]  # To get rid of the 0o
-                            warning_label.setText(bin2oct)
-                        elif combo2 == "dec":
-                            warning_label.setText(str(bin2dec))
-                        elif combo2 == "hex":
-                            bin2hex = hex(bin2dec)[2:].upper()  # To get rid of the 0x
-                            warning_label.setText(bin2hex)
-                    elif combo1 == "oct":
-                        oct2dec = int(entry, 8)
-                        if combo2 == "bin":
-                            oct2bin = bin(oct2dec)[2:]  # To get rid of the 0b
-                            warning_label.setText(oct2bin)
-                        elif combo2 == "dec":
-                            warning_label.setText(str(oct2dec))
-                        elif combo2 == "hex":
-                            oct2hex = hex(oct2dec)[2:].upper()  # To get rid of the 0x
-                            warning_label.setText(oct2hex)
-                    elif combo1 == "dec":
-                        if combo2 == "bin":
-                            dec2bin = bin(int(entry))[2:]  # To get rid of the 0b
-                            warning_label.setText(dec2bin)
-                        elif combo2 == "oct":
-                            dec2oct = oct(int(entry))[2:]  # To get rid of the 0o
-                            warning_label.setText(dec2oct)
-                        elif combo2 == "hex":
-                            dec2hex = hex(int(entry))[2:].upper()  # To get rid of the 0x
-                            warning_label.setText(dec2hex)
-                    elif combo1 == "hex":
-                        hex2dec = int(entry, 16)
-                        if combo2 == "bin":
-                            hex2bin = bin(hex2dec)[2:]  # To get rid of the 0b
-                            warning_label.setText(hex2bin)
-                        elif combo2 == "oct":
-                            hex2oct = oct(hex2dec)[2:]  # To get rid of the 0o
-                            warning_label.setText(hex2oct)
-                        elif combo2 == "dec":
-                            warning_label.setText(str(hex2dec))
+                    entry_10 = int(entry, combo1)
+                    systems_dict = {0: 2, 1: 8, 2: 10, 3: 16}
+                    systems_dict_console = {0: "bin", 1: "oct", 3: "hex"}
+                    if combo2 != 2:
+                        dec2 = eval(f'{systems_dict_console[combo2]}({entry_10})')[
+                            2:].upper()
+                        warning_label.setText(
+                            f'{entry}<sub>{combo1}</sub> = {dec2}<sub>{systems_dict[combo2]}</sub>')
+                    else:
+                        warning_label.setText(
+                            f'{entry}<sub>{combo1}</sub> = {entry_10}<sub>{10}</sub>')
                 except ValueError:
                     warning_label.setText('Invalid Input!!!')
                 except Exception as e:
-                    print(f'Error: {e}')  # Funnily enough, I'm pretty sure this is unnecessary. 🤔
+                    # Funnily enough, I'm pretty sure this is unnecessary. 🤔
+                    print(f'Error: {e}')
             else:
                 warning_label.setText("Entry box cannot be empty!!!")
 
